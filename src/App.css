@@ -1,0 +1,8 @@
+.controlIcon {
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.controlIcon:hover > svg {
+  color: white;
+}
