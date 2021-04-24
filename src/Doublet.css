@@ -1,0 +1,28 @@
+.DoubletTextLeft{
+  background-color: blue;
+  display: inline;
+  float: left;
+  margin-right: 50px;
+}
+
+.DoubletTextRight{
+  background-color: blue;
+  display: inline;
+  float: left;
+}
+
+.DoubletImageLeft{
+  display: inline;
+  float: left;
+  margin-right: 50px;
+}
+
+.DoubletImageRight{
+  display: inline;
+  float: left;
+}
+
+.DoubletContainer{
+  display: flex;
+  justify-content: center;
+}

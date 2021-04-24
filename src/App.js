@@ -3,10 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft, faCircle, faDotCircle, faHome } from '@fortawesome/free-solid-svg-icons'
 import './App.css';
 
+import Doublet from './Doublet'
+
 function Page({id, color, vw, vh}) {
   return (
     <div id={id} style={{backgroundColor: color, width: vw, height: vh}}>
       text
+      <Doublet text="I am not groot" url="testimage.png" imageleft={false} />
     </div>
   );
 }
@@ -28,7 +31,11 @@ function App() {
       color: "red",
       vw: vw,
       vh: vh,
-    }  
+    }, {
+      color: "cyan",
+      vw: vw,
+      vh: vh,
+    }
   ].map((val, ind) => (<Page id={ind} color={val.color} vw={val.vw} vh={val.vh}/>))
 
   const scrool = (i) => {
