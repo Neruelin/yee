@@ -26,6 +26,7 @@ function App() {
   ].map((val, ind) => (<Page id={ind} color={val.color} vw={val.vw} vh={val.vh}/>))
 
   const scrool = (i) => {
+    console.log(i)
     document.getElementById(i).scrollIntoView({behavior: "smooth"});
   };
 
@@ -40,11 +41,11 @@ function App() {
       </div>
       <div style={{width: "100%", position: "absolute", bottom: 20, display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
         <div>
-          <a style={{padding: "0 10px", cursor: "pointer"}} onClick={() => setIndex(pages.length + index - 1 % pages.length)}>&lt;</a>
+          <a style={{padding: "0 10px", cursor: "pointer"}} onClick={() => setIndex((pages.length + index - 1) % pages.length)}>&lt;</a>
           {
             pages.map((val, ind) => (<a style={{padding: "0 10px", cursor: "pointer"}} onClick={() => setIndex(ind)}>O</a>))
           }
-          <a style={{padding: "0 10px", cursor: "pointer"}} onClick={() => setIndex(pages.length + index + 1 % pages.length)}>&gt;</a>
+          <a style={{padding: "0 10px", cursor: "pointer"}} onClick={() => setIndex((pages.length + index + 1) % pages.length)}>&gt;</a>
         </div>
       </div>
     </div>
