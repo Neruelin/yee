@@ -15,24 +15,45 @@ function debounce(fn, ms) {
   };
 }
 
-function Page({id, color, vw, vh, content}) {
+function Page({id, zIndex, vw, vh, content, background}) {
   return (
-    <div id={id} style={{position: "relative", backgroundColor: color, width: vw, height: vh}}>
+    <div id={id} style={{zIndex: zIndex || 0, position: "relative", width: vw, height: vh - 60, overflow:"hidden", backgroundColor: background.color}}>
+      <div style={{zIndex: -1, width: vw, height: vh - 60, position: "absolute", top: 0, left: 0, overflow:"hidden", display:"flex", justifyContent:"space-around"}}>
+        {/* <img style={{objectFit: "cover", height: "100%"}} src="https://cdn.discordapp.com/attachments/456670054147293185/832401262912733254/TD17.gif"/> */}
+        {(background.img) ? <img style={{objectFit: "cover", width:"100%"}} src="/zenkoLandscape.png"/> : <></>}
+      </div>
       {content}
     </div>
   );
 }
 
-function Bio() {
+function Bio({setIndex}) {
   return (
-    <div style={{display: "flex", justifyContent: "space-around", width: "100vw", position: "absolute", top: "10%"}}>
-      <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-        <div style={{width: "200px"}}>
-          <img style={{borderRadius: "50%", width: "100%", height: "100%"}} alt="#" src="https://media-exp1.licdn.com/dms/image/C4D03AQEdRXe2FK6u-g/profile-displayphoto-shrink_800_800/0/1607029086697?e=1624492800&v=beta&t=P8HGRFutZWMdY5Sr7S3FSAH8ZGzfhtAQ10Pa8JI_JdM" />
-        </div>
-        <div style={{fontSize: "40px"}}>
-          {/* Hi, I'm Keira!
-          Blah blah blah.*/}
+    <div style={{position: "relative", height: "100%"}}>
+      <div onClick={() => setIndex(1)} style={{ cursor: "pointer", position: "absolute", bottom: "80px", left: "30px", width: "300px", backgroundColor: "rgba(0,0,0,0.3)", fontWeight: "bolder", color: "white", padding: "10px  "}}>
+        A Landscape From
+        <img style={{width: "100%"}} src="/zenkoLogoTransparent.png"/>
+        <span style={{position: "absolute", right: "65px", bottom: "25px", fontSize: "20px"}}>
+          A Fox's Tale
+        </span>
+      </div>
+      <div style={{position: "absolute", right: "0", height: "100%", width: "50%", backgroundColor: "rgba(0,0,0,0.5)"}}>
+        <div style={{height: "100%", display:"flex", flexDirection:"column", alignItems:"center", padding: "10%", backgroundColor: "rgba(0,0,0,0.2)"}}>
+          <div style={{width: "200px"}}>
+            <img style={{borderRadius: "50%", border: "3px solid white", width: "100%", height: "100%"}} alt="#" src="https://media-exp1.licdn.com/dms/image/C4D03AQEdRXe2FK6u-g/profile-displayphoto-shrink_800_800/0/1607029086697?e=1624492800&v=beta&t=P8HGRFutZWMdY5Sr7S3FSAH8ZGzfhtAQ10Pa8JI_JdM" />
+          </div>
+          <div style={{marginTop: 10, fontSize: "30px", fontWeight: "bold", color: "white", fontFamily: "Ubuntu"}}>
+            Hi! I’m Keira Taylor
+          </div>
+          <div style={{marginTop: 10, fontSize: "20px", fontWeight: "bold", color: "white", fontFamily: "Ubuntu"}}>
+            I'm a passionate gamer, game programmer, and huge nerd.
+            <br /><br />Ever since I played my first game, I’ve been entranced. I knew, starting in the fourth grade, that I wanted to be a game developer, and boy has it been a wild ride getting there! I graduated in 2019 from UCF with a Bachelor’s in Computer Science.
+            <br /><br />From there I transitioned right across the city to their master’s program for game design, Florida Interactive Entertainment Academy. Throughout the last few years, I’ve made a variety of games of all different types, though my heart will always belong to strategy games.
+            <br /><br />I’ve also created my own game engine, and gotten a little too close and personal to the computer through assembly x86. Working on games — especially UI, strategic mechanics, and level generation — is my favorite thing to do, and I can’t wait to make the next one!
+          </div>
+          <button onClick={() => setIndex(1)} style={{cursor: "pointer", position:"absolute", bottom: "50px", right:"50px", borderRadius: 0, border: "1px solid white", fontSize: 24, backgroundColor: "black", color: "white", padding: "5px", fontFamily: "Ubuntu"}}>
+            Explore My Work
+          </button>
         </div>
       </div>
     </div>
@@ -45,30 +66,46 @@ function App() {
     height: window.innerHeight,
     width: window.innerWidth
   })
-
+  let zindex = 0;
   const pages = [
-    {
-      color: "beige",
+    { 
+      zIndex: zindex++,
       vw: dimensions.width,
       vh: dimensions.height,
-      content: (<Bio />),
+      content: (<Bio setIndex={setIndex} />),
+      background: {
+        color: null,
+        img: "/zenkoLogoTransparent.png"
+      }
     }, {
-      color: "green",
+      zIndex: zindex++,
       vw: dimensions.width,
       vh: dimensions.height,
       content: (<Doublet text="I am not groot" url="testimage.png" imageleft={false} />),
+      background: {
+        color: "green",
+        img: null
+      }
     }, {
-      color: "purple",
+      zIndex: zindex++,
       vw: dimensions.width,
       vh: dimensions.height,
       content: null,
+      background: {
+        color: "purple",
+        img: null
+      }
     }, {
-      color: "red",
+      zIndex: zindex++,
       vw: dimensions.width,
       vh: dimensions.height,
       content: null,
+      background: {
+        color: "red",
+        img: null
+      }
     }
-  ].map((val, ind) => (<Page id={ind} color={val.color} vw={val.vw} vh={val.vh} content={val.content}/>))
+  ].map((val, ind) => (<Page id={ind} zIndex={val.zIndex} vw={val.vw} vh={val.vh} content={val.content} background={val.background} />))
 
   const scrool = (i) => {
     document.getElementById(i).scrollIntoView({behavior: "smooth"});
